@@ -1,1 +1,1 @@
-# gs-gateway
+# gs-gateway proxy server
