@@ -1,2 +1,1 @@
-#GSsss
-# ProxyServer
+# gs-gateway
