@@ -15,11 +15,11 @@ spring:
         pool:
           acquire-timeout: 6000
           max-connections: 200
-          connect-timeout: 60000
+        connect-timeout: 60000
 
-singapore-proxy-qa: https://wci-nonprod-qa.apigee.net
-singapore-proxy-stg: https://apigee-forwarder.stg.dp.dnbaws.net
-singapore-proxy-prod: https://apigee-forwarder.prod.dp.dnbaws.net
+singapore-proxy-qa: https://www.google.com
+singapore-proxy-stg: https://www.google.com
+singapore-proxy-prod: https://www.google.com
 
 ---
 spring:
