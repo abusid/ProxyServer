@@ -1,1 +1,1 @@
-# gs-gateway proxy server
+# gs-gateway proxy server from github
