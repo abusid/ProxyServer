@@ -1,0 +1,70 @@
+spring:
+  profiles:
+    active: 'devqa'
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+---
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        pool:
+          acquire-timeout: 6000
+          max-connections: 200
+          connect-timeout: 60000
+
+singapore-proxy-qa: https://wci-nonprod-qa.apigee.net
+singapore-proxy-stg: https://apigee-forwarder.stg.dp.dnbaws.net
+singapore-proxy-prod: https://apigee-forwarder.prod.dp.dnbaws.net
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: singapore-proxy
+          uri: ${singapore-proxy-qa}
+          predicates:
+            - Path=/v*/**
+          filters:
+            - AddRequestHeader=proxyname, DPlusChinaProxy
+           
+  config:
+    activate:
+      on-profile: devqa
+
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: singapore-proxy
+          uri: ${singapore-proxy-stg}
+          predicates:
+            - Path=/v*/**
+          filters:
+            - AddRequestHeader=proxyname, DPlusChinaProxy
+  config:
+    activate:
+      on-profile: stg
+
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: singapore-proxy
+          uri: ${singapore-proxy-prod}
+          predicates:
+            - Path=/v*/**
+          filters:
+            - AddRequestHeader=proxyname, DPlusChinaProxy
+  config:
+    activate:
+      on-profile: prod
